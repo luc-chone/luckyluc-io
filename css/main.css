@@ -1,0 +1,46 @@
+
+body{
+	background-image: url("images/bkg-clouds.png");
+}
+h1.title{
+	text-align: center;
+	color: #35A0F9;
+	font-size: 64px;
+}
+
+h1.title > strong{
+	color: #FECD52;
+}
+
+p.top-sentence{
+	text-align: center;
+	font-size: 50px;
+}
+
+.circle{	
+	width: 100px;
+	height: 100px;
+	margin: 0 auto;
+	border-radius: 50%;
+	background-color: blue;
+	display: flex;
+  justify-content: center;
+  align-items: center; 
+}
+
+.play_button{
+	border: solid 1px red;
+	text-align: center;
+	font-size: 32px;
+	font-weight: bold;
+}
+
+
+
+@keyframes blinker {  
+  50% { opacity: 0; }
+}
+
+.blink_me {
+  animation: blinker 2s linear infinite;
+}
