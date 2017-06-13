@@ -1,0 +1,22 @@
+{
+  "name": "luckyluc.io",
+  "version": "1.5.0",
+  "description": "luckyluc",
+  "main": "start.js",
+  "dependencies": {
+    "d3": "^4.9.1",
+    "handlebars": "^4.0.10",
+    "mvdom": "^0.3.6",
+    "hapi": "^16.1.1",
+    "inert": "^4.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "_wh"
+  },
+  "engines": {
+    "node": ">=7.10.0"
+  },
+  "author": "Luc Chone"
+}
