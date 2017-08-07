@@ -4,7 +4,8 @@ var car1El;
 
 var limitLeft = 50;
 var limitRight = 800;
-var direction = 1; 
+var directionPlane = 1; 
+var directionCar = 1;
 var step = 5;
 
 // ------- P5 app code ------- //
@@ -21,14 +22,14 @@ function draw(){
 	// decide the direction
 	if (currentLeft > limitRight){
 		plane1El.classList.add("left");
-		direction = -1;
+		directionPlane = -1;
 	}else if (currentLeft < limitLeft){
 		plane1El.classList.remove("left");
-		direction = 1;
+		directionPlane = 1;
 	}
 
 	// get the new left position from the direction
-	var newLeft = currentLeft + direction * step;
+	var newLeft = currentLeft + directionPlane * step;
 
 	plane1El.style.left = newLeft + "px";
 	// ------ /Moving Plane ------- //
@@ -40,14 +41,14 @@ function draw(){
 	// decide the direction
 	if (currentLeft > limitRight){
 		car1El.classList.add("left");
-		direction = -1;
+		directionCar = -1;
 	}else if (currentLeft < limitLeft){
 		car1El.classList.remove("left");
-		direction = 1;
+		directionCar = 1;
 	}
 
 	// get the new left position from the direction
-	var newLeft = currentLeft + direction * step;
+	var newLeft = currentLeft + directionCar * step;
 
 	car1El.style.left = newLeft + "px";
 	// ------ /Moving Car ------- //	
