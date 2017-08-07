@@ -37,20 +37,39 @@ p.top-sentence{
 	font-weight: bold;
 }
 
-#city{
+#house-1{
 	position: absolute;
-	bottom: 0px;
-	left: 50px;
-	width: 1000px;
-	height: 200px;
-	border: solid 1px blue;
-  top: 800px;
+	top: 650px;
+	left: 100px;
+	width: 100px;
+}
+#house-2{
+	position: absolute;
+	top: 645px;
+	left: 190px;
+	width: 200px; 
 }
 
-#plane{
+#plane-1{
 	position: absolute;
-	top: 200px;
+	top: 400px;
 	left: 50px;
+	transform: scale(-1, 1);
+}
+
+#plane-1.left{
+	transform: scale(1, 1);
+}
+
+
+#car-1{
+	position: absolute;
+	top: 705px;
+	left: 50px;
+	transform: scale(-1, 1);
+}
+#car-1.left{
+	transform: scale(1, 1);
 }
 
 @keyframes blinker {  
