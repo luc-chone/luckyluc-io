@@ -72,6 +72,17 @@ p.top-sentence{
 	transform: scale(1, 1);
 }
 
+#person-1{
+	position: absolute;
+	top: 695px;
+	left: 50px;
+	transform: scale(1, 1);
+}
+
+#person-1.left{
+	transform: scale(-1, 1);
+}
+
 @keyframes blinker {  
   90% { opacity: 0; }
 }

@@ -1,6 +1,7 @@
 
 var plane1El;
 var car1El;
+var person1EL
 
 var limitLeftPlane = -500;
 var limitRightPlane = 1200;
@@ -53,7 +54,26 @@ function draw(){
 	var newLeft = currentLeft + directionCar * step;
 
 	car1El.style.left = newLeft + "px";
-	// ------ /Moving Car ------- //	
+	// ------ /Moving Car ------- //
+
+	// ------ Moving person ------- //
+	// get the current left
+	var currentLeft = person1EL.offsetLeft;
+
+	// decide the direction
+	if (currentLeft > limitRightCar){
+		person1EL.classList.add("left");
+		directionCar = -1;
+	}else if (currentLeft < limitLeftCar){
+		person1EL.classList.remove("left");
+		directionCar = 1;
+	}
+
+	// get the new left position from the direction
+	var newLeft = currentLeft + directionCar * step;
+
+	person1EL.style.left = newLeft + "px";
+	// ------ /Moving person ------- //	
 };
 
 // ------- /P5 app code ------- //
@@ -64,5 +84,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	plane1El = document.getElementById("plane-1");
 	// assign car1El
 	car1El = document.getElementById("car-1");
+	person1EL = document.getElementById("person-1");
+
 });
 
