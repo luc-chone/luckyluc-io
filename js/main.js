@@ -2,8 +2,10 @@
 var plane1El;
 var car1El;
 
-var limitLeft = 50;
-var limitRight = 800;
+var limitLeftPlane = -500;
+var limitRightPlane = 1200;
+var limitLeftCar = 50;
+var limitRightCar = 800;
 var directionPlane = 1; 
 var directionCar = 1;
 var step = 5;
@@ -20,10 +22,10 @@ function draw(){
 	var currentLeft = plane1El.offsetLeft;
 
 	// decide the direction
-	if (currentLeft > limitRight){
+	if (currentLeft > limitRightPlane){
 		plane1El.classList.add("left");
 		directionPlane = -1;
-	}else if (currentLeft < limitLeft){
+	}else if (currentLeft < limitLeftPlane){
 		plane1El.classList.remove("left");
 		directionPlane = 1;
 	}
@@ -39,10 +41,10 @@ function draw(){
 	var currentLeft = car1El.offsetLeft;
 
 	// decide the direction
-	if (currentLeft > limitRight){
+	if (currentLeft > limitRightCar){
 		car1El.classList.add("left");
 		directionCar = -1;
-	}else if (currentLeft < limitLeft){
+	}else if (currentLeft < limitLeftCar){
 		car1El.classList.remove("left");
 		directionCar = 1;
 	}
