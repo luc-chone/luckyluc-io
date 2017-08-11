@@ -10,6 +10,9 @@ var limitRightCar = 800;
 var directionPlane = 1; 
 var directionCar = 1;
 var step = 5;
+var limitLeftPerson = -100;
+var limitRightPerson = 1200;
+var directionPerson = 1;
 
 // ------- P5 app code ------- //
 function setup(){
@@ -61,16 +64,16 @@ function draw(){
 	var currentLeft = person1EL.offsetLeft;
 
 	// decide the direction
-	if (currentLeft > limitRightCar){
+	if (currentLeft > limitRightPerson){
 		person1EL.classList.add("left");
-		directionCar = -1;
-	}else if (currentLeft < limitLeftCar){
+		directionPerson = -0.5;
+	}else if (currentLeft < limitLeftPerson){
 		person1EL.classList.remove("left");
-		directionCar = 1;
+		directionPerson = 0.5;
 	}
 
 	// get the new left position from the direction
-	var newLeft = currentLeft + directionCar * step;
+	var newLeft = currentLeft + directionPerson * step;
 
 	person1EL.style.left = newLeft + "px";
 	// ------ /Moving person ------- //	
