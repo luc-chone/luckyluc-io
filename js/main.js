@@ -1,18 +1,33 @@
 
-var plane1El;
-var car1El;
-var person1EL
+var plane1 = {el: null,
+			 htmlId: "plane-1",
+			 limitLeft: -500, 
+			 limitRight: 1200,
+			 direction: 1, 
+			 speed: 5};
 
-var limitLeftPlane = -500;
-var limitRightPlane = 1200;
-var limitLeftCar = 50;
-var limitRightCar = 800;
-var directionPlane = 1; 
-var directionCar = 1;
-var step = 5;
-var limitLeftPerson = -100;
-var limitRightPerson = 1200;
-var directionPerson = 1;
+var car1 = {el: null,
+			htmlId: "car-1",
+			limitLeft: 50, 
+			limitRight: 800,
+			direction: 1,
+		    speed: 5};
+
+var person1 = {el: null,
+			htmlId: "person-1",
+			limitLeft: -100, 
+			limitRight: 1200,
+			direction: 1,
+			speed: 2.5};		
+			
+var person2 = {el: null,
+			htmlId: "person-2",
+			limitLeft: 200, 
+			limitRight: 800,
+			direction: 1,
+			speed: 4};			
+
+var movableObjects = [plane1, car1, person1, person2];
 
 // ------- P5 app code ------- //
 function setup(){
@@ -21,73 +36,36 @@ function setup(){
 
 function draw(){
 	
-	// ------ Moving Plane ------- //
-	// get the current left
-	var currentLeft = plane1El.offsetLeft;
-
-	// decide the direction
-	if (currentLeft > limitRightPlane){
-		plane1El.classList.add("left");
-		directionPlane = -1;
-	}else if (currentLeft < limitLeftPlane){
-		plane1El.classList.remove("left");
-		directionPlane = 1;
+	for (obj of movableObjects){
+		moveObject(obj)
 	}
-
-	// get the new left position from the direction
-	var newLeft = currentLeft + directionPlane * step;
-
-	plane1El.style.left = newLeft + "px";
-	// ------ /Moving Plane ------- //
-
-	// ------ Moving Car ------- //
-	// get the current left
-	var currentLeft = car1El.offsetLeft;
-
-	// decide the direction
-	if (currentLeft > limitRightCar){
-		car1El.classList.add("left");
-		directionCar = -1;
-	}else if (currentLeft < limitLeftCar){
-		car1El.classList.remove("left");
-		directionCar = 1;
-	}
-
-	// get the new left position from the direction
-	var newLeft = currentLeft + directionCar * step;
-
-	car1El.style.left = newLeft + "px";
-	// ------ /Moving Car ------- //
-
-	// ------ Moving person ------- //
-	// get the current left
-	var currentLeft = person1EL.offsetLeft;
-
-	// decide the direction
-	if (currentLeft > limitRightPerson){
-		person1EL.classList.add("left");
-		directionPerson = -0.5;
-	}else if (currentLeft < limitLeftPerson){
-		person1EL.classList.remove("left");
-		directionPerson = 0.5;
-	}
-
-	// get the new left position from the direction
-	var newLeft = currentLeft + directionPerson * step;
-
-	person1EL.style.left = newLeft + "px";
-	// ------ /Moving person ------- //	
 };
 
+function moveObject(obj){
+	
+	// get the current left
+	var currentLeft = obj.el.offsetLeft;
+	
+	// decide the direction
+	if (currentLeft > obj.limitRight){
+		obj.el.classList.add("left");
+		obj.direction = -1;
+	}else if (currentLeft < obj.limitLeft){
+		obj.el.classList.remove("left");
+		obj.direction = 1;
+	}
+
+	// get the new left position from the direction
+	var newLeft = currentLeft + obj.direction * obj.speed;
+
+	obj.el.style.left = newLeft + "px";
+}
 // ------- /P5 app code ------- //
 
 // This will be called when the page is loaded (before setup and draw)
 document.addEventListener("DOMContentLoaded", function(event) {
-	// assign plane1El to point to the DOM plane-1 element.
-	plane1El = document.getElementById("plane-1");
-	// assign car1El
-	car1El = document.getElementById("car-1");
-	person1EL = document.getElementById("person-1");
-
+	for (obj of movableObjects){
+		obj.el = document.getElementById(obj.htmlId)
+	}
 });
 
