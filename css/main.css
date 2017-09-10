@@ -85,6 +85,14 @@ p.top-sentence{
 
 }
 
+#cloud-2{
+	position: absolute;
+	top: 240px;
+	left: 135px;
+	opacity: 0.50;
+
+}
+
 @keyframes blinker {  
   90% { opacity: 0; }
 }

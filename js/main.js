@@ -32,9 +32,16 @@ var cloud1 = {el: null,
 			limitLeft: -100, 
 			limitRight: 1100,
 			direction: 1,
-			speed: 0.49};						
+			speed: 0.32};
 
- var movableObjects = [plane1, car1, person1, person2, cloud1 ];
+var cloud2 = {el: null,
+			htmlId: "cloud-2",
+			limitLeft: -100, 
+			limitRight: 1100,
+			direction: 1,
+			speed: 0.02};
+
+ var movableObjects = [plane1, car1, person1, person2, cloud1,cloud2 ];
 
 
 // ------- P5 app code ------- //
