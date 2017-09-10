@@ -25,9 +25,17 @@ var person2 = {el: null,
 			limitLeft: 200, 
 			limitRight: 800,
 			direction: 1,
-			speed: 4};			
+			speed: 4};	
+			
+var cloud1 = {el: null,
+			htmlId: "cloud-1",
+			limitLeft: -100, 
+			limitRight: 1100,
+			direction: 1,
+			speed: 0.49};						
 
-var movableObjects = [plane1, car1, person1, person2];
+ var movableObjects = [plane1, car1, person1, person2, cloud1 ];
+
 
 // ------- P5 app code ------- //
 function setup(){
@@ -44,21 +52,25 @@ function draw(){
 function moveObject(obj){
 	
 	// get the current left
-	var currentLeft = obj.el.offsetLeft;
-	
+	obj.currentLeft = (obj.currentLeft == null)?obj.el.offsetLeft:obj.currentLeft;
+
 	// decide the direction
-	if (currentLeft > obj.limitRight){
+	if (obj.currentLeft  > obj.limitRight){
 		obj.el.classList.add("left");
 		obj.direction = -1;
-	}else if (currentLeft < obj.limitLeft){
+	}else if (obj.currentLeft  < obj.limitLeft){
 		obj.el.classList.remove("left");
 		obj.direction = 1;
 	}
 
 	// get the new left position from the direction
-	var newLeft = currentLeft + obj.direction * obj.speed;
-
+	var newLeft = obj.currentLeft + obj.direction * obj.speed;
+	
+	// update the html element left (this will round the el.offsetLeft)
 	obj.el.style.left = newLeft + "px";
+
+	// and we store exact newLeft in the obj.currentLeft
+	obj.currentLeft = newLeft;
 }
 // ------- /P5 app code ------- //
 

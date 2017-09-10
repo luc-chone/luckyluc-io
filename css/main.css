@@ -77,6 +77,14 @@ p.top-sentence{
 	left: 135px;
 }
 
+#cloud-1{
+	position: absolute;
+	top: 308px;
+	left: 135px;
+	opacity: 0.75;
+
+}
+
 @keyframes blinker {  
   90% { opacity: 0; }
 }
