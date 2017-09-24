@@ -4,6 +4,7 @@ html, body{
 body{
 	background-image: url("images/bkg-clouds.png");
 }
+
 h1.title{
 	text-align: center;
 	color: #35A0F9;
@@ -12,6 +13,10 @@ h1.title{
 
 h1.title > strong{
 	color: #FECD52;
+}
+
+h1.title > small{
+	color: #000000
 }
 
 p.top-sentence{
@@ -87,10 +92,9 @@ p.top-sentence{
 
 #cloud-2{
 	position: absolute;
-	top: 240px;
+	top: 265px;
 	left: 135px;
 	opacity: 0.50;
-
 }
 
 @keyframes blinker {  
