@@ -23,23 +23,6 @@ class Plane{
 	}
 }
 
-var plane1 = {el: null,
-			 htmlId: "plane-1",
-			 limitLeft: -500, 
-			 limitRight: 1200,
-			 direction: 1, 
-			 speed: 5, 
-			 onClick: function(event){
-				var planeEl = this.el;
-				// change the "src" attribute with the new explosion
-				planeEl.setAttribute("src", "images/explosion-1.gif");
-				setTimeout(() => {
-					planeEl.parentNode.removeChild(planeEl);
-					removeObject(this);
-				}, 500)					
-			 }
-			};
-
 var car1 = {el: null,
 			htmlId: "car-1",
 			limitLeft: 50, 
@@ -80,7 +63,7 @@ var cloud2 = {el: null,
 			}
 		};
 
- var objects = [plane1, car1, person1, person2, cloud1,cloud2 ];
+ var objects = [car1, person1, person2, cloud1,cloud2 ];
 
 
 // ------- P5 app code ------- //
@@ -134,6 +117,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		// now that the object is ready, we initialize it. 
 		initializeObject(obj);
 	}
+
+	var firstPlane = new Plane();
+	addObject(firstPlane);
 });
 
 // Add a new object to the list of managed objects
