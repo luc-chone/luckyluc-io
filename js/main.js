@@ -4,7 +4,17 @@ var plane1 = {el: null,
 			 limitLeft: -500, 
 			 limitRight: 1200,
 			 direction: 1, 
-			 speed: 5};
+			 speed: 5, 
+			 onClick: function(event){
+				var planeEl = this.el;
+				// change the "src" attribute with the new explosion
+				planeEl.setAttribute("src", "images/explosion-1.gif");
+				setTimeout(() => {
+					planeEl.parentNode.removeChild(planeEl);
+					removeObject(this);
+				}, 500)					
+			 }
+			};
 
 var car1 = {el: null,
 			htmlId: "car-1",
@@ -41,7 +51,7 @@ var cloud2 = {el: null,
 			direction: 1,
 			speed: 0.02};
 
- var movableObjects = [plane1, car1, person1, person2, cloud1,cloud2 ];
+ var objects = [plane1, car1, person1, person2, cloud1,cloud2 ];
 
 
 // ------- P5 app code ------- //
@@ -51,13 +61,17 @@ function setup(){
 
 function draw(){
 	
-	for (obj of movableObjects){
+	for (obj of objects){
 		moveObject(obj)
 	}
 };
 
 function moveObject(obj){
-	
+	// here we make sure we move object that have a direction
+	if (obj.direction == null){
+		return;
+	}
+
 	// get the current left
 	obj.currentLeft = (obj.currentLeft == null)?obj.el.offsetLeft:obj.currentLeft;
 
@@ -83,8 +97,21 @@ function moveObject(obj){
 
 // This will be called when the page is loaded (before setup and draw)
 document.addEventListener("DOMContentLoaded", function(event) {
-	for (obj of movableObjects){
-		obj.el = document.getElementById(obj.htmlId)
+
+	// for all of our mo
+	for (let obj of objects){
+		obj.el = document.getElementById(obj.htmlId);
+		// we add the event listener only if the obj has a .onClick
+		if (obj.onClick != null){
+			obj.el.addEventListener('click', function(event){
+				obj.onClick();	
+			})
+		}
 	}
 });
 
+// helper function
+function removeObject(object){
+	var index = objects.indexOf(object);
+	objects.splice(index, 1);
+}
