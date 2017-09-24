@@ -1,4 +1,28 @@
 
+class Plane{
+	constructor(){
+		var html = '<img class="plane" src="images/plane-1.png" width="100">';
+		this.el = htmlToElement(html);
+
+		this.limitLeft = -500;
+		this.limitRight = 1200;
+		this.direction = 1;
+		this.speed = 5;
+	}
+
+	onClick(){
+		this.crash();
+	}
+
+	crash(){
+		this.el.setAttribute("src", "images/explosion-1.gif");
+		setTimeout(() =>{
+			this.el.parentNode.removeChild(this.el);
+			removeObject(this);
+		}, 500)
+	}
+}
+
 var plane1 = {el: null,
 			 htmlId: "plane-1",
 			 limitLeft: -500, 
@@ -49,7 +73,12 @@ var cloud2 = {el: null,
 			limitLeft: -100, 
 			limitRight: 1100,
 			direction: 1,
-			speed: 0.02};
+			speed: 0.02,
+			onClick: function(){
+				var newPlane = new Plane();
+				addObject(newPlane);
+			}
+		};
 
  var objects = [plane1, car1, person1, person2, cloud1,cloud2 ];
 
@@ -100,18 +129,43 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 	// for all of our mo
 	for (let obj of objects){
+		// the element is already in HTML, so, we just get it by id.
 		obj.el = document.getElementById(obj.htmlId);
-		// we add the event listener only if the obj has a .onClick
-		if (obj.onClick != null){
-			obj.el.addEventListener('click', function(event){
-				obj.onClick();	
-			})
-		}
+		// now that the object is ready, we initialize it. 
+		initializeObject(obj);
 	}
 });
 
+// Add a new object to the list of managed objects
+function addObject(object){
+	// first, we add it to the DOM (to HTML with javascript)
+	document.querySelector("body").appendChild(object.el);
+
+	// second, we add the event listener
+	initializeObject(object);
+
+	// then we add it to the list of objects
+	objects.push(object);
+}
+
+
+function initializeObject(object){
+	if (object.onClick != null){
+		object.el.addEventListener('click', function(event){
+			object.onClick();	
+		})
+	}
+}
 // helper function
 function removeObject(object){
 	var index = objects.indexOf(object);
 	objects.splice(index, 1);
+}
+
+
+// create HTMLELement from string
+function htmlToElement(html) {
+    var template = document.createElement('template');
+    template.innerHTML = html;
+    return template.content.firstChild;
 }

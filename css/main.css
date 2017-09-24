@@ -37,6 +37,17 @@ p.top-sentence{
 	width: 200px; 
 }
 
+.plane{
+	position: absolute;
+	top: 400px;
+	left: 50px;
+	transform: scale(-1, 1);	
+}
+
+.plane.left{
+	transform: scale(1, 1);
+}
+
 #plane-1{
 	position: absolute;
 	top: 400px;
