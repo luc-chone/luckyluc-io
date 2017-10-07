@@ -93,6 +93,11 @@ var cloud2 = {
 	onClick: function () {
 		var newPlane = new Plane();
 		addObject(newPlane);
+
+
+		var newCar = new Car();
+		addObject(newCar);
+
 	}
 };
 
