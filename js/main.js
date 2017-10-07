@@ -1,6 +1,6 @@
 
-class Plane{
-	constructor(){
+class Plane {
+	constructor() {
 		var html = '<img class="plane" src="images/plane-1.png" width="100">';
 		this.el = htmlToElement(html);
 
@@ -10,95 +10,128 @@ class Plane{
 		this.speed = 5;
 	}
 
-	onClick(){
+	onClick() {
 		this.crash();
 	}
 
-	crash(){
+	crash() {
 		this.el.setAttribute("src", "images/explosion-1.gif");
-		setTimeout(() =>{
+		setTimeout(() => {
 			this.el.parentNode.removeChild(this.el);
 			removeObject(this);
 		}, 500)
 	}
 }
 
-var car1 = {el: null,
-			htmlId: "car-1",
-			limitLeft: 50, 
-			limitRight: 800,
-			direction: 1,
-		    speed: 5};
+class Car {
+	constructor() {
+		var html = '<img class="car" src="images/car-1.png" width="100">';
+		this.el = htmlToElement(html);
 
-var person1 = {el: null,
-			htmlId: "person-1",
-			limitLeft: -100, 
-			limitRight: 1200,
-			direction: 1,
-			speed: 2.5};		
-			
-var person2 = {el: null,
-			htmlId: "person-2",
-			limitLeft: 200, 
-			limitRight: 800,
-			direction: 1,
-			speed: 4};	
-			
-var cloud1 = {el: null,
-			htmlId: "cloud-1",
-			limitLeft: -100, 
-			limitRight: 1100,
-			direction: 1,
-			speed: 0.32};
+		this.limitLeft = -200;
+		this.limitRight = 1000;
+		this.direction = 1;
+		this.speed = 3;
+	}
 
-var cloud2 = {el: null,
-			htmlId: "cloud-2",
-			limitLeft: -100, 
-			limitRight: 1100,
-			direction: 1,
-			speed: 0.02,
-			onClick: function(){
-				var newPlane = new Plane();
-				addObject(newPlane);
-			}
-		};
+	onClick() {
+		this.crash();
+	}
 
- var objects = [car1, person1, person2, cloud1,cloud2 ];
+	crash() {
+		this.el.setAttribute("src", "images/explosion-1.gif");
+		setTimeout(() => {
+			this.el.parentNode.removeChild(this.el);
+			removeObject(this);
+		}, 500)
+	}
+}
+
+// var car1 = {
+// 	el: null,
+// 	htmlId: "car-1",
+// 	limitLeft: -400,
+// 	limitRight: 1200,
+// 	direction: 1,
+// 	speed: 5
+// };
+
+var person1 = {
+	el: null,
+	htmlId: "person-1",
+	limitLeft: -100,
+	limitRight: 1200,
+	direction: 1,
+	speed: 2.5
+};
+
+var person2 = {
+	el: null,
+	htmlId: "person-2",
+	limitLeft: 200,
+	limitRight: 800,
+	direction: 1,
+	speed: 4
+};
+
+var cloud1 = {
+	el: null,
+	htmlId: "cloud-1",
+	limitLeft: -100,
+	limitRight: 1100,
+	direction: 1,
+	speed: 0.32
+};
+
+var cloud2 = {
+	el: null,
+	htmlId: "cloud-2",
+	limitLeft: -100,
+	limitRight: 1100,
+	direction: 1,
+	speed: 0.02,
+	onClick: function () {
+		var newPlane = new Plane();
+		addObject(newPlane);
+	}
+};
+
+var objects = [person1, person2, cloud1, cloud2];
 
 
 // ------- P5 app code ------- //
-function setup(){
+function setup() {
 
 }
 
-function draw(){
-	
-	for (obj of objects){
+function draw() {
+
+	for (obj of objects) {
 		moveObject(obj)
 	}
 };
 
-function moveObject(obj){
+function moveObject(obj) {
 	// here we make sure we move object that have a direction
-	if (obj.direction == null){
+	if (obj.direction == null) {
 		return;
 	}
 
 	// get the current left
-	obj.currentLeft = (obj.currentLeft == null)?obj.el.offsetLeft:obj.currentLeft;
+	obj.currentLeft = (obj.currentLeft == null) ? obj.el.offsetLeft : obj.currentLeft;
 
 	// decide the direction
-	if (obj.currentLeft  > obj.limitRight){
+	if (obj.currentLeft > obj.limitRight) {
 		obj.el.classList.add("left");
 		obj.direction = -1;
-	}else if (obj.currentLeft  < obj.limitLeft){
+	} else if (obj.currentLeft < obj.limitLeft) {
 		obj.el.classList.remove("left");
 		obj.direction = 1;
 	}
 
 	// get the new left position from the direction
 	var newLeft = obj.currentLeft + obj.direction * obj.speed;
-	
+
 	// update the html element left (this will round the el.offsetLeft)
 	obj.el.style.left = newLeft + "px";
 
@@ -108,10 +141,10 @@ function moveObject(obj){
 // ------- /P5 app code ------- //
 
 // This will be called when the page is loaded (before setup and draw)
-document.addEventListener("DOMContentLoaded", function(event) {
+document.addEventListener("DOMContentLoaded", function (event) {
 
 	// for all of our mo
-	for (let obj of objects){
+	for (let obj of objects) {
 		// the element is already in HTML, so, we just get it by id.
 		obj.el = document.getElementById(obj.htmlId);
 		// now that the object is ready, we initialize it. 
@@ -120,10 +153,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 	var firstPlane = new Plane();
 	addObject(firstPlane);
+
+	var firstCar = new Car();
+	addObject(firstCar);
 });
 
 // Add a new object to the list of managed objects
-function addObject(object){
+function addObject(object) {
 	// first, we add it to the DOM (to HTML with javascript)
 	document.querySelector("body").appendChild(object.el);
 
@@ -135,15 +171,15 @@ function addObject(object){
 }
 
 
-function initializeObject(object){
-	if (object.onClick != null){
-		object.el.addEventListener('click', function(event){
-			object.onClick();	
+function initializeObject(object) {
+	if (object.onClick != null) {
+		object.el.addEventListener('click', function (event) {
+			object.onClick();
 		})
 	}
 }
 // helper function
-function removeObject(object){
+function removeObject(object) {
 	var index = objects.indexOf(object);
 	objects.splice(index, 1);
 }
@@ -151,7 +187,7 @@ function removeObject(object){
 
 // create HTMLELement from string
 function htmlToElement(html) {
-    var template = document.createElement('template');
-    template.innerHTML = html;
-    return template.content.firstChild;
+	var template = document.createElement('template');
+	template.innerHTML = html;
+	return template.content.firstChild;
 }

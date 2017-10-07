@@ -48,17 +48,16 @@ p.top-sentence{
 	transform: scale(1, 1);
 }
 
-#plane-1{
+.car{
 	position: absolute;
-	top: 400px;
-	left: 50px;
-	transform: scale(-1, 1);
+	top: 800px;
+	left: 100px;
+	transform: scale(-1, 1);	
 }
 
-#plane-1.left{
+.car.left{
 	transform: scale(1, 1);
 }
-
 
 #car-1{
 	position: absolute;
@@ -69,6 +68,8 @@ p.top-sentence{
 #car-1.left{
 	transform: scale(1, 1);
 }
+
+
 
 .person{
 	position: absolute;
