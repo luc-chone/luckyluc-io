@@ -95,13 +95,25 @@ var cloud2 = {
 		addObject(newPlane);
 
 
+
+
+	}
+};
+
+var house2 = {
+	el: null,
+	htmlId: "house-2",
+
+	onClick: function () {
+
+
 		var newCar = new Car();
 		addObject(newCar);
 
 	}
 };
 
-var objects = [person1, person2, cloud1, cloud2];
+var objects = [person1, person2, cloud1, cloud2, house2,];
 
 
 // ------- P5 app code ------- //
