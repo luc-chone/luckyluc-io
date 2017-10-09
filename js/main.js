@@ -47,32 +47,32 @@ class Car {
 	}
 }
 
-// var car1 = {
-// 	el: null,
-// 	htmlId: "car-1",
-// 	limitLeft: -400,
-// 	limitRight: 1200,
-// 	direction: 1,
-// 	speed: 5
-// };
+class person {
+	constructor() {
+		var html = '<img class="person" src="images/person-running.gif" width="50">';
+		this.el = htmlToElement(html);
 
-var person1 = {
-	el: null,
-	htmlId: "person-1",
-	limitLeft: -100,
-	limitRight: 1200,
-	direction: 1,
-	speed: 2.5
-};
+		this.limitLeft = -100;
+		this.limitRight = 900;
+		this.direction = 1;
+		this.speed = 2;
+	}
 
-var person2 = {
-	el: null,
-	htmlId: "person-2",
-	limitLeft: 200,
-	limitRight: 800,
-	direction: 1,
-	speed: 4
-};
+	onClick() {
+		this.crash();
+	}
+
+	crash() {
+		this.el.setAttribute("src", "images/explosion-1.gif");
+		setTimeout(() => {
+			this.el.parentNode.removeChild(this.el);
+			removeObject(this);
+		}, 500)
+	}
+}
+
+
+
 
 var cloud1 = {
 	el: null,
@@ -93,10 +93,6 @@ var cloud2 = {
 	onClick: function () {
 		var newPlane = new Plane();
 		addObject(newPlane);
-
-
-
-
 	}
 };
 
@@ -113,7 +109,20 @@ var house2 = {
 	}
 };
 
-var objects = [person1, person2, cloud1, cloud2, house2,];
+var house1 = {
+	el: null,
+	htmlId: "house-1",
+
+	onClick: function () {
+
+
+		var newperson = new person();
+		addObject(newperson);
+
+	}
+};
+
+var objects = [cloud1, cloud2, house2, house1];
 
 
 // ------- P5 app code ------- //
@@ -173,6 +182,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 	var firstCar = new Car();
 	addObject(firstCar);
+
+	var firstperson = new person();
+	addObject(firstperson);
 });
 
 // Add a new object to the list of managed objects

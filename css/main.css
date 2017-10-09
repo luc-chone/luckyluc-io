@@ -29,6 +29,7 @@ p.top-sentence{
 	top: 650px;
 	left: 100px;
 	width: 100px;
+	border: 1 solid red;
 }
 #house-2{
 	position: absolute;
@@ -59,21 +60,12 @@ p.top-sentence{
 	transform: scale(1, 1);
 }
 
-#car-1{
-	position: absolute;
-	top: 755px;
-	left: 50px;
-	transform: scale(-1, 1);
-}
-#car-1.left{
-	transform: scale(1, 1);
-}
 
 
 
 .person{
 	position: absolute;
-	top: 730px;
+	top: 700px;
 	left: 50px;
 	transform: scale(1, 1);
 }
@@ -90,14 +82,15 @@ p.top-sentence{
 
 #tree-a{
 	position: absolute;
-	top: 608px;
+	top: 628px;
 	left: 135px;
+	z-index: 100;
 }
 
 #cloud-1{
 	position: absolute;
 	top: 308px;
-	left: 135px;
+	left: 435px;
 	opacity: 0.75;
 }
 
