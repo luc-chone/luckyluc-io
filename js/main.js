@@ -36,7 +36,7 @@ class Car extends MovingEntity {
 
 
 		this.limitLeft = -200;
-		this.limitRight = 1000;
+		this.limitRight = 1400;
 		this.direction = 1;
 		this.speed = 3;
 	}
@@ -49,7 +49,7 @@ class Person extends MovingEntity {
 		// var html = '<img class="person" src="images/person-running.gif" width="50">';
 		// this.el = htmlToElement(html);
 
-		this.limitLeft = -100;
+		this.limitLeft = -50;
 		this.limitRight = 900;
 		this.direction = 1;
 		this.speed = 2;
