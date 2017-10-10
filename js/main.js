@@ -1,56 +1,53 @@
 
-class Plane {
-	constructor() {
-		var html = '<img class="plane" src="images/plane-1.png" width="100">';
+class MovingEntity {
+
+	constructor(type, src, width) {
+		var html = `<img class='${type}' src='${src}' width='${width}'>`;
 		this.el = htmlToElement(html);
+	}
+
+	onClick() {
+		this.crash();
+	}
+
+	crash() {
+		this.el.setAttribute("src", "images/explosion-1.gif");
+		setTimeout(() => {
+			this.el.parentNode.removeChild(this.el);
+			removeObject(this);
+		}, 500)
+	}
+}
+
+class Plane extends MovingEntity {
+	constructor() {
+		super('plane', 'images/plane-1.png', 100);
 
 		this.limitLeft = -500;
 		this.limitRight = 1200;
 		this.direction = 1;
 		this.speed = 5;
 	}
-
-	onClick() {
-		this.crash();
-	}
-
-	crash() {
-		this.el.setAttribute("src", "images/explosion-1.gif");
-		setTimeout(() => {
-			this.el.parentNode.removeChild(this.el);
-			removeObject(this);
-		}, 500)
-	}
 }
 
-class Car {
+class Car extends MovingEntity {
 	constructor() {
-		var html = '<img class="car" src="images/car-1.png" width="100">';
-		this.el = htmlToElement(html);
+		super('car', 'images/car-1.png', 100);
+
 
 		this.limitLeft = -200;
 		this.limitRight = 1000;
 		this.direction = 1;
 		this.speed = 3;
 	}
-
-	onClick() {
-		this.crash();
-	}
-
-	crash() {
-		this.el.setAttribute("src", "images/explosion-1.gif");
-		setTimeout(() => {
-			this.el.parentNode.removeChild(this.el);
-			removeObject(this);
-		}, 500)
-	}
 }
 
-class person {
+class Person extends MovingEntity {
 	constructor() {
-		var html = '<img class="person" src="images/person-running.gif" width="50">';
-		this.el = htmlToElement(html);
+		super('person', 'images/person-running.gif', 50);
+
+		// var html = '<img class="person" src="images/person-running.gif" width="50">';
+		// this.el = htmlToElement(html);
 
 		this.limitLeft = -100;
 		this.limitRight = 900;
@@ -58,20 +55,7 @@ class person {
 		this.speed = 2;
 	}
 
-	onClick() {
-		this.crash();
-	}
-
-	crash() {
-		this.el.setAttribute("src", "images/explosion-1.gif");
-		setTimeout(() => {
-			this.el.parentNode.removeChild(this.el);
-			removeObject(this);
-		}, 500)
-	}
 }
-
-
 
 
 var cloud1 = {
@@ -116,7 +100,7 @@ var house1 = {
 	onClick: function () {
 
 
-		var newperson = new person();
+		var newperson = new Person();
 		addObject(newperson);
 
 	}
@@ -183,7 +167,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 	var firstCar = new Car();
 	addObject(firstCar);
 
-	var firstperson = new person();
+	var firstperson = new Person();
 	addObject(firstperson);
 });
 
