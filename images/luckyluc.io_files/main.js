@@ -26,7 +26,7 @@ class Plane extends MovingEntity {
 		this.limitLeft = -500;
 		this.limitRight = 1200;
 		this.direction = 1;
-		this.speed = 6;
+		this.speed = 5;
 	}
 }
 
@@ -38,7 +38,7 @@ class Car extends MovingEntity {
 		this.limitLeft = -200;
 		this.limitRight = 1400;
 		this.direction = 1;
-		this.speed = 4;
+		this.speed = 3;
 	}
 }
 
