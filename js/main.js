@@ -44,7 +44,7 @@ class Car extends MovingEntity {
 
 class Person extends MovingEntity {
 	constructor() {
-		super('person', 'images/person-running.gif', 50);
+		super('person', 'images/person-running.gif', 35);
 
 		// var html = '<img class="person" src="images/person-running.gif" width="50">';
 		// this.el = htmlToElement(html);

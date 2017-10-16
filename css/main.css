@@ -38,6 +38,13 @@ p.top-sentence{
 	width: 200px; 
 }
 
+#hardware-store-a{
+	position: absolute;
+	top: 620px;
+	left: 470px;
+	width: 150px; 
+}
+
 .plane{
 	position: absolute;
 	top: 400px;
@@ -65,9 +72,10 @@ p.top-sentence{
 
 .person{
 	position: absolute;
-	top: 710px;
+	top: 720px;
 	left: 50px;
 	transform: scale(1, 1);
+
 }
 
 .person.left{
