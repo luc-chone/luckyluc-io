@@ -16,6 +16,12 @@ window.addEventListener('DOMContentLoaded', function () {
         else if (evt.key === 's') {
             game.moveSphereZ(-1);
         }
+        else if (evt.key === 'd') {
+            game.moveSphereX(1);
+        }
+        else if (evt.key === 'a') {
+            game.moveSphereX(-1);
+        }
     });
     document.addEventListener('keyup', function (evt) {
         if (evt.key === 'w') {
@@ -23,6 +29,12 @@ window.addEventListener('DOMContentLoaded', function () {
         }
         else if (evt.key === 's') {
             game.moveSphereZ(0);
+        }
+        else if (evt.key === 'd') {
+            game.moveSphereX(0);
+        }
+        else if (evt.key === 'a') {
+            game.moveSphereX(0);
         }
     });
 });

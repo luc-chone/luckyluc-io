@@ -39,18 +39,28 @@ export class Game {
         });
     }
     /**
-     *
+     * Move the sphere on z axis
      * @param direction 1 goes far, -1 goes close, 0 stop the animation
      */
     moveSphereZ(direction) {
+        this.moveSphere("position.z", this._sphere.position.z, direction);
+    }
+    /**
+     * Move the sphere on z axis
+     * @param direction 1 goes far, -1 goes close, 0 stop the animation
+     */
+    moveSphereX(direction) {
+        this.moveSphere("position.x", this._sphere.position.x, direction);
+    }
+    moveSphere(propertyName, position, direction) {
         const scene = this._scene;
         const sphere = this._sphere;
         if (direction === 0 && this._sphereAnim) {
             this._sphereAnim.stop();
         }
         else {
-            const animation = new BABYLON.Animation("myAnimation", "position.z", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_RELATIVE);
-            const keyframes = [{ frame: 0, value: sphere.position.z }, { frame: 30, value: 10 * direction }];
+            const animation = new BABYLON.Animation("myAnimation", propertyName, 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_RELATIVE);
+            const keyframes = [{ frame: 0, value: position }, { frame: 30, value: 10 * direction }];
             animation.setKeys(keyframes);
             sphere.animations = [animation];
             this._sphereAnim = scene.beginAnimation(sphere, 0, 90, true);
