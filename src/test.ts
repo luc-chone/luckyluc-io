@@ -20,9 +20,9 @@ window.addEventListener('DOMContentLoaded', function () {
 			game.moveSphereZ(1);
 		} else if (evt.key === 's') {
 			game.moveSphereZ(-1);
-		} else if (evt.key === 'd') {
+		} else if (evt.key === 'e') {
 			game.moveSphereX(1);
-		} else if (evt.key === 'a') {
+		} else if (evt.key === 'q') {
 			game.moveSphereX(-1);
 		}
 	});
@@ -32,9 +32,9 @@ window.addEventListener('DOMContentLoaded', function () {
 			game.moveSphereZ(0);
 		} else if (evt.key === 's') {
 			game.moveSphereZ(0);
-		} else if (evt.key === 'd') {
+		} else if (evt.key === 'q') {
 			game.moveSphereX(0);
-		} else if (evt.key === 'a') {
+		} else if (evt.key === 'e') {
 			game.moveSphereX(0);
 		}
 	});

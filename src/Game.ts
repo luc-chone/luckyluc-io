@@ -1,4 +1,5 @@
 import { Animatable } from "babylonjs";
+import { Chicken } from './Chicken.js';
 
 export class Game {
 	private _canvas: HTMLCanvasElement;
@@ -6,7 +7,7 @@ export class Game {
 	private _scene?: BABYLON.Scene;
 	private _camera?: BABYLON.FreeCamera;
 	private _light?: BABYLON.Light;
-	private _sphere?: BABYLON.Mesh;
+	private _chicken?: Chicken;
 	private _sphereAnim?: BABYLON.Animatable;
 
 	constructor(canvasElement: string) {
@@ -33,18 +34,10 @@ export class Game {
 		this._light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(0, 1, 0), this._scene);
 
 		// Create a built-in "sphere" shape; with 16 segments and diameter of 2.
-		this._sphere = BABYLON.MeshBuilder.CreateSphere('sphere', { segments: 16, diameter: 2 }, this._scene);
+		this._chicken = new Chicken(this._scene);
+		this._chicken.position(0, 2, 0);
 
-		this._sphere.setAbsolutePosition(new BABYLON.Vector3(0, 3, 0));
-		var sphereMaterial = new BABYLON.StandardMaterial("sphereMaterial", this._scene);
-		// sphereMaterial.alpha = 0.9;
-		// sphereMaterial.diffuseColor = new BABYLON.Color3(2, 1, 1);
-		// sphereMaterial.specularColor = new BABYLON.Color3(0.1, 0.8, 0.87);
-		sphereMaterial.emissiveColor = new BABYLON.Color3(.1, 0, 1);
-		// sphereMaterial.ambientColor = new BABYLON.Color3(0.9, 0.1, 0);
-		this._sphere.material = sphereMaterial;
-
-		// Create a built-in "ground" shape.
+		// Create a built-in "ground" shape
 		let ground = BABYLON.MeshBuilder.CreateGround('ground', { width: 20, height: 20, subdivisions: 2 }, this._scene);
 		var groundMaterial = new BABYLON.StandardMaterial("groundMaterial", this._scene);
 		groundMaterial.diffuseColor = new BABYLON.Color3(0.5, 0.5, 0.7);
@@ -68,7 +61,7 @@ export class Game {
 	 * @param direction 1 goes far, -1 goes close, 0 stop the animation
 	 */
 	moveSphereZ(direction: number): void {
-		this.moveSphere("position.z", this._sphere!.position.z, direction);	
+		this._chicken!.moveZ(direction);
 	}
 
 	/**
@@ -76,24 +69,9 @@ export class Game {
 	 * @param direction 1 goes far, -1 goes close, 0 stop the animation
 	 */
 	moveSphereX(direction: number): void {
-		this.moveSphere("position.x", this._sphere!.position.x, direction);
-	}	
+		this._chicken!.moveX(direction);
+	}
 
-	moveSphere(propertyName: string, position: number, direction: number){
-		const scene = this._scene!;
-		const sphere: BABYLON.Mesh = this._sphere!;
-	
-		if (direction === 0 && this._sphereAnim) {
-			this._sphereAnim.stop();
-		} else {
-			const animation = new BABYLON.Animation("myAnimation", propertyName, 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_RELATIVE);
-			const keyframes = [{ frame: 0, value: position }, { frame: 30, value: 100 * direction }];
-			animation.setKeys(keyframes);
-			sphere.animations = [animation];
-	
-			this._sphereAnim = scene.beginAnimation(sphere, 0, 90, true);
-		}	
-	}	
 }
 
 
