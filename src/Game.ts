@@ -37,7 +37,11 @@ export class Game {
 
 		this._sphere.setAbsolutePosition(new BABYLON.Vector3(0, 3, 0));
 		var sphereMaterial = new BABYLON.StandardMaterial("sphereMaterial", this._scene);
-		sphereMaterial.wireframe = true;
+		// sphereMaterial.alpha = 0.9;
+		// sphereMaterial.diffuseColor = new BABYLON.Color3(2, 1, 1);
+		// sphereMaterial.specularColor = new BABYLON.Color3(0.1, 0.8, 0.87);
+		sphereMaterial.emissiveColor = new BABYLON.Color3(.1, 0, 1);
+		// sphereMaterial.ambientColor = new BABYLON.Color3(0.9, 0.1, 0);
 		this._sphere.material = sphereMaterial;
 
 		// Create a built-in "ground" shape.
@@ -83,7 +87,7 @@ export class Game {
 			this._sphereAnim.stop();
 		} else {
 			const animation = new BABYLON.Animation("myAnimation", propertyName, 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_RELATIVE);
-			const keyframes = [{ frame: 0, value: position }, { frame: 30, value: 10 * direction }];
+			const keyframes = [{ frame: 0, value: position }, { frame: 30, value: 100 * direction }];
 			animation.setKeys(keyframes);
 			sphere.animations = [animation];
 	
