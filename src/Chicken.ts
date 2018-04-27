@@ -21,6 +21,10 @@ export class Chicken {
 		// sphereMaterial.ambientColor = new BABYLON.Color3(0.9, 0.1, 0);
 		this._body.material = sphereMaterial;
 		head.material = sphereMaterial;
+
+		const imp = new BABYLON.PhysicsImpostor(this._body, BABYLON.PhysicsImpostor.SphereImpostor,
+			{ mass: 1, restitution: 0.9 }, this._scene);
+
 	}
 
 	position(x: number, y: number, z: number) {

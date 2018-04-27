@@ -16,3 +16,8 @@
 	- Click on terminal
 	- Type `Ctrl c`
 	- `git checkout -- .`
+
+
+## Useful docs
+
+- Gravity: https://doc.babylonjs.com/how_to/using_the_physics_engine

@@ -5,6 +5,7 @@
   "main": "start.js",
   "dependencies": {
     "babylonjs": "^3.2.0-rc.2",
+    "cannon": "^0.6.2",
     "d3": "^4.9.1",
     "handlebars": "^4.0.10",
     "hapi": "^16.1.1",

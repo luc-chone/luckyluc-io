@@ -21,6 +21,9 @@ export class Game {
 		this._scene = new BABYLON.Scene(this._engine);
 		this._scene.ambientColor = new BABYLON.Color3(1, 1, 1);
 
+		//this._scene.gravity = new BABYLON.Vector3(0, -9.81, 0);
+		this._scene.enablePhysics(new BABYLON.Vector3(0, -9.8, 0), new BABYLON.CannonJSPlugin());
+
 		// Create a FreeCamera, and set its position to (x:0, y:5, z:-10).
 		this._camera = new BABYLON.FreeCamera('camera1', new BABYLON.Vector3(0, 5, -10), this._scene);
 
@@ -33,15 +36,24 @@ export class Game {
 		// Create a basic light, aiming 0,1,0 - meaning, to the sky.
 		this._light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(0, 1, 0), this._scene);
 
-		// Create a built-in "sphere" shape; with 16 segments and diameter of 2.
-		this._chicken = new Chicken(this._scene);
-		this._chicken.position(0, 2, 0);
 
 		// Create a built-in "ground" shape
 		let ground = BABYLON.MeshBuilder.CreateGround('ground', { width: 20, height: 20, subdivisions: 2 }, this._scene);
 		var groundMaterial = new BABYLON.StandardMaterial("groundMaterial", this._scene);
 		groundMaterial.diffuseColor = new BABYLON.Color3(0.5, 0.5, 0.7);
 		ground.material = groundMaterial;
+		const imp = new BABYLON.PhysicsImpostor(ground, BABYLON.PhysicsImpostor.BoxImpostor,
+			{ mass: 0, restitution: 0.9 }, this._scene);
+
+
+
+		// Create a built-in "sphere" shape; with 16 segments and diameter of 2.
+		this._chicken = new Chicken(this._scene);
+		this._chicken.position(0, 2, 0);
+
+
+
+
 	}
 
 	doRender(): void {
