@@ -1,7 +1,7 @@
 {
 	"compilerOptions": {
 		// For browser client, we target edge and above, so es6 (i.e., es2015) is safe. (for ie11 and safari9, es5 should be the target)
-		"target": "es2015",
+		"target": "es2017",
 		// We will target only browsers that support ES2015 modules (i.e., import ...)
 		"module": "commonjs",
 
@@ -14,10 +14,10 @@
 
 		// This is just to check the code once in a while to check the tsc output with a raw "ts". 
 		// "npm run build" will use rollup and does not need the .js to be emitted.
-		"outDir": "./scripts/~out", /* Redirect output structure to the directory. */
+		"outDir": "./~out", /* Redirect output structure to the directory. */
 
 		// We point the root dir to the parent to include eventual ../common/ (and we will exclude other .ts dirs, like eventual server/)
-		"rootDir": "./scripts/",
+		"rootDir": "./src/",
 
 		// To extract the maximum value from TypeScript, we use strict = true (no implicit, null check, ...)
 		"strict": true, 
@@ -33,11 +33,11 @@
 
 	// We want more control about which code we will compile and exclude
 	"include": [
-		"./scripts/**/*.ts"
+		"./src/**/*.ts"
 	],
 
 	"exclude": [
-		"node_modules",
+		"../node_modules",
 		"server", // we exclude server
 		".rpt2_cache" // this folder will be created by the rollup-typescript2, so, need to exlude it, can become confusing.
 	]

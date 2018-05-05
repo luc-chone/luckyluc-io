@@ -10,7 +10,7 @@
 - In VSCode in the project, (Ctrl + `) (or Command + Shift + P and type integrated term)
 - `npm run watch` does the start and build when code change.
 
-- for the 3d test: http://localhost:8888/test.html
+- for the 3d test: http://localhost:8080/test.html
 
 - To revert to working code 
 	- Click on terminal

@@ -1,5 +1,7 @@
-import { Animatable } from "babylonjs";
+import { Animatable } from 'babylonjs';
 import { Chicken } from './Chicken.js';
+import { PlayerController } from './PlayerController.js';
+
 
 export class Game {
 	private _canvas: HTMLCanvasElement;
@@ -9,14 +11,17 @@ export class Game {
 	private _light?: BABYLON.Light;
 	private _chicken?: Chicken;
 	private _sphereAnim?: BABYLON.Animatable;
+	private _fpsElem?: HTMLElement;
 
-	constructor(canvasElement: string) {
+	constructor(canvasElement: string, fpsElem?: HTMLElement | null) {
 		// Create canvas and engine.
 		this._canvas = document.getElementById(canvasElement) as HTMLCanvasElement;
 		this._engine = new BABYLON.Engine(this._canvas, true);
+		this._fpsElem = (fpsElem) ? fpsElem : undefined;
 	}
 
 	createScene(): void {
+
 		// Create a basic BJS Scene object.
 		this._scene = new BABYLON.Scene(this._engine);
 		this._scene.ambientColor = new BABYLON.Color3(1, 1, 1);
@@ -31,7 +36,7 @@ export class Game {
 		this._camera.setTarget(BABYLON.Vector3.Zero());
 
 		// Attach the camera to the canvas.
-		this._camera.attachControl(this._canvas);
+		this._camera.attachControl(this._canvas, false);
 
 		// Create a basic light, aiming 0,1,0 - meaning, to the sky.
 		this._light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(0, 1, 0), this._scene);
@@ -46,12 +51,11 @@ export class Game {
 			{ mass: 0, restitution: 0.9 }, this._scene);
 
 
-
 		// Create a built-in "sphere" shape; with 16 segments and diameter of 2.
 		this._chicken = new Chicken(this._scene);
 		this._chicken.position(0, 2, 0);
 
-
+		const pc = new PlayerController(this._chicken, this._scene);
 
 
 	}
@@ -60,6 +64,10 @@ export class Game {
 		// Run the render loop.
 		this._engine.runRenderLoop(() => {
 			this._scene!.render();
+			if (this._fpsElem) {
+				const fps = Math.round(this._engine.getFps());
+				this._fpsElem.textContent = `${fps}FPS`;
+			}
 		});
 
 		// The canvas/window resize event handler.
@@ -72,7 +80,7 @@ export class Game {
 	 * Move the sphere on z axis
 	 * @param direction 1 goes far, -1 goes close, 0 stop the animation
 	 */
-	moveSphereZ(direction: number): void {
+	moveChickenZ(direction: number): void {
 		this._chicken!.moveZ(direction);
 	}
 
@@ -80,8 +88,12 @@ export class Game {
 	 * Move the sphere on z axis
 	 * @param direction 1 goes far, -1 goes close, 0 stop the animation
 	 */
-	moveSphereX(direction: number): void {
+	moveChickenX(direction: number): void {
 		this._chicken!.moveX(direction);
+	}
+
+	rotateChickenY(direction: number): void {
+		this._chicken!.rotateY(direction);
 	}
 
 }
