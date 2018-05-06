@@ -1,7 +1,8 @@
-import { Scene, Vector3, Mesh, Animatable } from 'babylonjs';
+import { Scene, Vector3, Mesh, Animatable, Material } from 'babylonjs';
 import { Entity } from './Entity.js'
 
 export class Chicken implements Entity {
+	private _head: Mesh;
 	private _scene: Scene;
 	private _body: Mesh;
 	private _bodyAnim?: Animatable;
@@ -13,21 +14,24 @@ export class Chicken implements Entity {
 		// const head = BABYLON.MeshBuilder.CreateSphere('sphere', { segments: 16, diameter: 1 }, this._scene);
 		this._body = BABYLON.MeshBuilder.CreateBox('body', { width: 2, height: 2, depth: 3 }, this._scene);
 		this._body.rotation = new BABYLON.Vector3(0, Math.PI, 0);
-		const head = BABYLON.MeshBuilder.CreateBox('head', { width: 1, height: 1, depth: 1 }, this._scene);
+		this._head = BABYLON.MeshBuilder.CreateBox('head', { width: 1, height: 1, depth: 1 }, this._scene);
 
 
-		head.setAbsolutePosition(new BABYLON.Vector3(0, 1, -3));
-		head.parent = this._body;
-		const sphereMaterial = new BABYLON.StandardMaterial("sphereMaterial", this._scene);
-		// sphereMaterial.alpha = 0.9;
-		sphereMaterial.diffuseColor = new BABYLON.Color3(2, 1, 1);
-		sphereMaterial.specularColor = new BABYLON.Color3(0.1, 0.8, 0.87);
-		sphereMaterial.emissiveColor = new BABYLON.Color3(.1, 0, 1);
-		// sphereMaterial.ambientColor = new BABYLON.Color3(0.9, 0.1, 0);
-		this._body.material = sphereMaterial;
-		head.material = sphereMaterial;
+		this._head.setAbsolutePosition(new BABYLON.Vector3(0, 1, -3));
+		this._head.parent = this._body;
 
+		const mat = new BABYLON.StandardMaterial("mat", this._scene);
+		// mat.alpha = 0.9;
+		mat.diffuseColor = new BABYLON.Color3(155/255,88/255, 10/255);
+		mat.specularColor = new BABYLON.Color3(1, 1, 1);
+		mat.emissiveColor = new BABYLON.Color3(.1, .1, .1);
+		// mat.ambientColor = new BABYLON.Color3(0.9, 0.1, 0);
+		this._body.material = mat;
 
+		const matHead = new BABYLON.StandardMaterial("matHead", this._scene);
+		matHead.diffuseColor = new BABYLON.Color3(135/255,132/255, 129/255);
+		this._head.material = matHead;
+		
 		const imp = new BABYLON.PhysicsImpostor(this._body, BABYLON.PhysicsImpostor.SphereImpostor,
 			{ mass: 1, restitution: 0.9 }, this._scene);
 
