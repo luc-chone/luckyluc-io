@@ -29,7 +29,7 @@ export class Chicken implements Entity {
 		this._body.material = mat;
 
 		const matHead = new BABYLON.StandardMaterial("matHead", this._scene);
-		matHead.diffuseColor = new BABYLON.Color3(135/255,132/255, 129/255);
+		matHead.diffuseTexture = new BABYLON.Texture("images/texture-chicken.jpg", scene);
 		this._head.material = matHead;
 		
 		const imp = new BABYLON.PhysicsImpostor(this._body, BABYLON.PhysicsImpostor.SphereImpostor,
