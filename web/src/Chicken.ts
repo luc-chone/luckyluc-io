@@ -9,9 +9,14 @@ export class Chicken implements Entity {
 	constructor(scene: Scene) {
 		this._scene = scene;
 		// create body
-		this._body = BABYLON.MeshBuilder.CreateSphere('sphere', { segments: 16, diameter: 2 }, this._scene);
-		const head = BABYLON.MeshBuilder.CreateSphere('sphere', { segments: 16, diameter: 1 }, this._scene);
-		head.setAbsolutePosition(new BABYLON.Vector3(0, 1, 1));
+		// this._body = BABYLON.MeshBuilder.CreateSphere('sphere', { segments: 16, diameter: 2 }, this._scene);
+		// const head = BABYLON.MeshBuilder.CreateSphere('sphere', { segments: 16, diameter: 1 }, this._scene);
+		this._body = BABYLON.MeshBuilder.CreateBox('body', { width: 2, height: 2, depth: 3 }, this._scene);
+		this._body.rotation = new BABYLON.Vector3(0, Math.PI, 0);
+		const head = BABYLON.MeshBuilder.CreateBox('head', { width: 1, height: 1, depth: 1 }, this._scene);
+
+
+		head.setAbsolutePosition(new BABYLON.Vector3(0, 1, -3));
 		head.parent = this._body;
 		const sphereMaterial = new BABYLON.StandardMaterial("sphereMaterial", this._scene);
 		// sphereMaterial.alpha = 0.9;
@@ -21,6 +26,7 @@ export class Chicken implements Entity {
 		// sphereMaterial.ambientColor = new BABYLON.Color3(0.9, 0.1, 0);
 		this._body.material = sphereMaterial;
 		head.material = sphereMaterial;
+
 
 		const imp = new BABYLON.PhysicsImpostor(this._body, BABYLON.PhysicsImpostor.SphereImpostor,
 			{ mass: 1, restitution: 0.9 }, this._scene);
