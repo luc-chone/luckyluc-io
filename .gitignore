@@ -16,7 +16,6 @@ notes/
 
 # prevent the output files to be checked in 
 web/js/*.js
-web/css/*.css
 
 # prevent the .map
 *.map
