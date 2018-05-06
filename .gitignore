@@ -5,6 +5,8 @@
 node_modules/
 npm-debug.log
 
+~*
+
 # We do not really want to commit the package-lock at this time (could be send for prod apps)
 package-lock.json
 
