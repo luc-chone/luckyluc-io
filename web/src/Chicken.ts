@@ -1,4 +1,4 @@
-import { Scene, Vector3, Mesh, Animatable, Material } from 'babylonjs';
+import { Scene, Vector3, Mesh, Animatable, Material, PhysicsImpostor } from 'babylonjs';
 import { Entity } from './Entity.js'
 
 export class Chicken implements Entity {
@@ -7,6 +7,8 @@ export class Chicken implements Entity {
 	private _body: Mesh;
 	private _bodyAnim?: Animatable;
 	private _animByProperty: { [property: string]: BABYLON.Animation } = {};
+	private _bodyImposter: PhysicsImpostor;
+
 	constructor(scene: Scene) {
 		this._scene = scene;
 		// create body
@@ -15,7 +17,6 @@ export class Chicken implements Entity {
 		this._body = BABYLON.MeshBuilder.CreateBox('body', { width: 2, height: 2, depth: 3 }, this._scene);
 		this._body.rotation = new BABYLON.Vector3(0, Math.PI, 0);
 		this._head = BABYLON.MeshBuilder.CreateBox('head', { width: 1, height: 1, depth: 1 }, this._scene);
-
 
 		this._head.setAbsolutePosition(new BABYLON.Vector3(0, 1, -3));
 		this._head.parent = this._body;
@@ -32,8 +33,8 @@ export class Chicken implements Entity {
 		matHead.diffuseTexture = new BABYLON.Texture("images/texture-chicken.jpg", scene);
 		this._head.material = matHead;
 		
-		const imp = new BABYLON.PhysicsImpostor(this._body, BABYLON.PhysicsImpostor.SphereImpostor,
-			{ mass: 1, restitution: 0.9 }, this._scene);
+		this._bodyImposter = new BABYLON.PhysicsImpostor(this._body, BABYLON.PhysicsImpostor.SphereImpostor,
+			{ mass: 3, restitution: 0.9 }, this._scene);
 
 	}
 
@@ -45,6 +46,10 @@ export class Chicken implements Entity {
 	position(x: number, y: number, z: number) {
 		const vectorPosition = new BABYLON.Vector3(x, y, z);
 		this._body.setAbsolutePosition(vectorPosition);
+	}
+
+	jump(){
+		this._bodyImposter.applyImpulse(new BABYLON.Vector3(0,10,0), this._body.getAbsolutePosition());
 	}
 
 	moveZ(direction: number) {

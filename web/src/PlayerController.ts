@@ -96,6 +96,7 @@ export class PlayerController {
 	}
 
 	private onKey(event: KeyboardEvent, shouldMove: boolean) {
+		
 
 		// This is for the moves
 		if (event.key === 'w') {
@@ -112,6 +113,10 @@ export class PlayerController {
 			this._rotates.left = shouldMove;
 		} else if (event.key === 'd') {
 			this._rotates.right = shouldMove;
+		}
+		// for jump
+		else if (event.key === ' ') {
+			this._entity.jump();
 		}
 	}
 }
