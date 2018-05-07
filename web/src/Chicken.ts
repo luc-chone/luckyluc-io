@@ -9,18 +9,17 @@ export class Chicken implements Entity {
 	private _animByProperty: { [property: string]: BABYLON.Animation } = {};
 	private _bodyImposter: PhysicsImpostor;
 
-	constructor(scene: Scene) {
+	constructor(scene: Scene, x: number, y: number, z: number) {
 		this._scene = scene;
+		
 		// create body
-		// this._body = BABYLON.MeshBuilder.CreateSphere('sphere', { segments: 16, diameter: 2 }, this._scene);
-		// const head = BABYLON.MeshBuilder.CreateSphere('sphere', { segments: 16, diameter: 1 }, this._scene);
 		this._body = BABYLON.MeshBuilder.CreateBox('body', { width: 2, height: 2, depth: 3 }, this._scene);
 		this._body.rotation = new BABYLON.Vector3(0, Math.PI, 0);
-		this._head = BABYLON.MeshBuilder.CreateBox('head', { width: 1, height: 1, depth: 1 }, this._scene);
+		this.position(x, y, z);
 
-		this._head.setAbsolutePosition(new BABYLON.Vector3(0, 1, -3));
-		this._head.parent = this._body;
 
+		
+		// body material
 		const mat = new BABYLON.StandardMaterial("mat", this._scene);
 		// mat.alpha = 0.9;
 		mat.diffuseColor = new BABYLON.Color3(155/255,88/255, 10/255);
@@ -29,12 +28,23 @@ export class Chicken implements Entity {
 		// mat.ambientColor = new BABYLON.Color3(0.9, 0.1, 0);
 		this._body.material = mat;
 
+		// create the head
+		this._head = BABYLON.MeshBuilder.CreateBox('head', { width: 1, height: 1, depth: 1 }, this._scene);
+		this._head.setAbsolutePosition(new BABYLON.Vector3(0, 1, -3));
+		this._head.parent = this._body;
+		// FIXME: When _head has parent, imposter has not effect.
+		// const imp = new BABYLON.PhysicsImpostor(this._head, BABYLON.PhysicsImpostor.BoxImpostor,
+		// 	{ mass: 1, restitution: 0.9 }, this._scene);
+
+		this._bodyImposter = new BABYLON.PhysicsImpostor(this._body, BABYLON.PhysicsImpostor.BoxImpostor,
+				{ mass: 3, restitution: 0.9 }, this._scene);
+
+		// head material
 		const matHead = new BABYLON.StandardMaterial("matHead", this._scene);
 		matHead.diffuseTexture = new BABYLON.Texture("images/texture-chicken.jpg", scene);
 		this._head.material = matHead;
 		
-		this._bodyImposter = new BABYLON.PhysicsImpostor(this._body, BABYLON.PhysicsImpostor.SphereImpostor,
-			{ mass: 3, restitution: 0.9 }, this._scene);
+
 
 	}
 
