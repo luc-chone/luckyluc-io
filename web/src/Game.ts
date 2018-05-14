@@ -53,21 +53,31 @@ export class Game {
 		// create box
 		const box = BABYLON.Mesh.CreateBox("box", 3.0, this._scene);
 		new BABYLON.PhysicsImpostor(box, BABYLON.PhysicsImpostor.BoxImpostor,
-			{ mass: 0, restitution: 0.9 }, this._scene);	
+			{ mass: 0, restitution: 0.9 }, this._scene);
 
-		// // create box
+		// create box
 		let box1 = BABYLON.MeshBuilder.CreateBox('box1', { width: 10, height: 3, depth: 5, }, this._scene);
-    new BABYLON.PhysicsImpostor(box1, BABYLON.PhysicsImpostor.BoxImpostor,
-			{ mass: 0, restitution: 0.9 }, this._scene);	
-			box1.setAbsolutePosition(new BABYLON.Vector3(0, 5, 20));
+		new BABYLON.PhysicsImpostor(box1, BABYLON.PhysicsImpostor.BoxImpostor,
+			{ mass: 0, restitution: 0.9 }, this._scene);
+		box1.setAbsolutePosition(new BABYLON.Vector3(0, 5, 20));
 
-		// Create a built-in "sphere" shape; with 16 segments and diameter of 2.
+		// Create the chicken player
 		this._chicken = new Chicken(this._scene, 0, 10, 0);
-
-
+		// Assign the PlayerController to the chicken
 		const pc = new PlayerController(this._chicken, this._scene);
 
 
+		//this._bodyImposter.applyImpulse(new BABYLON.Vector3(0, 10, 0), this._body.getAbsolutePosition());
+		////// Test bullet
+
+		// Create & position Bullet
+		const bullet = BABYLON.MeshBuilder.CreateSphere("bullet", { diameterX: 1, diameterY: 1, diameterZ: 1 }, this._scene);
+		bullet.setAbsolutePosition(new BABYLON.Vector3(5, 10, 0));
+		// add imposter
+		const bulletImpostor = new BABYLON.PhysicsImpostor(bullet, BABYLON.PhysicsImpostor.SphereImpostor,
+			{ mass: 0.1, restitution: 0.9 }, this._scene);
+		// impulse
+		bulletImpostor.applyImpulse(new BABYLON.Vector3(-1, 0, 0), bullet.getAbsolutePosition());
 	}
 
 	doRender(): void {
