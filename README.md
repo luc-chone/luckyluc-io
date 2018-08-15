@@ -1,9 +1,19 @@
 
-## How to build and run
+## How to build a
+From terminal below the text (type "Ctrl + `" to show it), type the following: 
 
-- `npm install` to install all of the modules
-- `npm run build` to build the .ts to .js
-- `npm start`
+Do once, at the beginning of a development session
+- `git pull` to get the new code from github.
+- `npm install` to install or update all of the modules.
+
+When starting dev, do 
+- `npm run watch` to run and ability to change the code and things will rebuild on the background.
+
+Then, go to 
+
+- home page: http://localhost:8080/
+- 3d test: http://localhost:8080/test.html
+
 
 ## How to develop
 

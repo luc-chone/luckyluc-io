@@ -38,6 +38,13 @@ p.top-sentence{
 	width: 200px; 
 }
 
+#doghouse-1{
+	position: absolute;
+	top: 700px;
+	left: 480px;
+}
+
+
 #hardware-store-a{
 	position: absolute;
 	top: 620px;
@@ -82,11 +89,25 @@ p.top-sentence{
 	transform: scale(-1, 1);
 }
 
+.dog{
+	position: absolute;
+	top: 735px;
+	left: 500px; 
+	transform: scale(1, 1);
+
+}
+
+.dog.left{
+	transform: scale(-1, 1);
+}
+
 #street-1{
 	position: absolute;
 	top: 745px;
 	left: 0px;
 }
+
+
 
 #tree-a{
 	position: absolute;

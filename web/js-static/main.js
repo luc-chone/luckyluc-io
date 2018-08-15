@@ -57,6 +57,18 @@ class Person extends MovingEntity {
 
 }
 
+class Dog extends MovingEntity {
+	constructor() {
+		super('dog', 'images/dog-a.gif', 35);
+
+		this.limitLeft = -50;
+		this.limitRight = 900;
+		this.direction = 1;
+		this.speed = 0.8;
+	}
+
+}
+
 
 var cloud1 = {
 	el: null,
@@ -85,11 +97,18 @@ var house2 = {
 	htmlId: "house-2",
 
 	onClick: function () {
-
-
 		var newCar = new Car();
 		addObject(newCar);
+	}
+};
 
+var doghouse1 = {
+	el: null,
+	htmlId: "doghouse-1",
+
+	onClick: function () {
+		var newDog = new Dog();
+		addObject(newDog);
 	}
 };
 
@@ -98,15 +117,12 @@ var house1 = {
 	htmlId: "house-1",
 
 	onClick: function () {
-
-
 		var newperson = new Person();
 		addObject(newperson);
-
 	}
 };
 
-var objects = [cloud1, cloud2, house2, house1];
+var objects = [cloud1, cloud2, house2, house1, doghouse1];
 
 
 // ------- P5 app code ------- //
@@ -169,6 +185,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 	var firstperson = new Person();
 	addObject(firstperson);
+
+	var firstdog = new Dog();
+	addObject(firstdog);
 });
 
 // Add a new object to the list of managed objects
