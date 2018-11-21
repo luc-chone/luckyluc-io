@@ -65,6 +65,10 @@ export class Entity {
 		}
 		if (config.onClick != null) {
 			this.onClick = config.onClick;
+		} else {
+			this.onClick = () => {
+				this.crash();
+			}
 		}
 		//#endregion ---------- /Other configs ---------- 
 
@@ -77,6 +81,7 @@ export class Entity {
 
 	crash() {
 		this.el.setAttribute("src", "images/explosion-1.gif");
+		console.log(">>>> .crash call")
 		setTimeout(() => {
 			if (this.el.parentNode == null) {
 				throw new Error(`Cannot display ${this.el} no parentNode`)
