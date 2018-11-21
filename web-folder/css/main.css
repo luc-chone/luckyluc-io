@@ -5,6 +5,13 @@ body{
 	background-image: url("images/bkg-clouds.png");
 }
 
+.overlay {
+	height:0px;
+	overflow:visible;
+	pointer-events:none;
+	background:none !important;
+}
+
 h1.title{
 	text-align: center;
 	color: #35A0F9;
@@ -112,7 +119,7 @@ p.top-sentence{
 #tree-a{
 	position: absolute;
 	top: 628px;
-	left: 135px;
+	left: 635px;
 	z-index: 100;
 }
 

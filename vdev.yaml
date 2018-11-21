@@ -1,0 +1,40 @@
+system: lucky
+baseBlockDir: / # used as the base dir .dir (as '${baseDir}/${blockName}/'')
+k8sDir: k8s/
+
+#-# {{assignJsonValue 'dropVersion' 'package.json' 'dropVersion'}}
+
+realms:
+  _common:  
+    yamlDir: gke/ # Those are the google kubernetes engine yaml files. Might be the same for aws EKS (when it is released)
+    webExternalPort: 8080
+
+  dev:
+    context: docker-for-desktop
+    yamlDir: dev/ # for dev, we override the yamlDir
+    imageTag: {{@root.dropVersion}}
+    
+  jc-prod:
+    confirmOnDelete: true
+    context: gke_jc-prod_us-west1-b_jc-sites-cluster-a
+    project: jc-prod
+    imageTag: {{@root.dropVersion}}
+    yamlDir: jc-prod/    
+
+blocks:
+  - name: web
+    dir: web-folder
+    baseDistDir: web-folder
+    webBundles:
+      - name: lib
+        entries: ./src/lib-bundle.js
+        dist: ./js/lib-bundle.js
+      - name: app
+        entries: ./src/**/*.ts
+        dist: ./js/app-bundle.js
+        rollupOptions:
+          globals:
+            p5: window.p5
+            mvdom: window.mvdom
+  - name: server
+    dir: ./

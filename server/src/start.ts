@@ -5,7 +5,7 @@ var fs = require('fs');
 
 var app = express();
 
-const webDir = 'web/';
+const webDir = 'web-folder/';
 
 app.use(async (req, res, next) => {
 	console.log(req.url);

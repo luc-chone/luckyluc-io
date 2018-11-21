@@ -9,6 +9,7 @@ async function _default() {
 
 
 async function watch() {
-	spawn('tsc', ['-w', '-p', 'web/']);
-	await spawn('./node_modules/.bin/ts-node', ['server/src/start.ts']);
+	spawn('./node_modules/.bin/vdev', ['build', 'watch', 'web']);
+
+	await spawn('npm', ['run', 'start']);
 }

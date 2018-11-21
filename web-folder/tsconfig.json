@@ -1,7 +1,8 @@
 {
 	"compilerOptions": {
 		// For browser client, we target edge and above, so es6 (i.e., es2015) is safe. (for ie11 and safari9, es5 should be the target)
-		"target": "es2015",
+		"target": "es2016",
+		
 		// We will target only browsers that support ES2015 modules (i.e., import ...)
 		"module": "es2015",
 
@@ -19,7 +20,6 @@
 		// We point the root dir to the parent to include eventual ../common/ (and we will exclude other .ts dirs, like eventual server/)
 		"rootDir": "./src/",
     "types": [
-        "babylonjs"
     ],
 
 		// To extract the maximum value from TypeScript, we use strict = true (no implicit, null check, ...)

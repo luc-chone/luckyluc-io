@@ -1,33 +1,25 @@
 
-## How to build a
-From terminal below the text (type "Ctrl + `" to show it), type the following: 
+Requirements: Latest nodejs | Recommendation: VSCode as editor/ide. 
 
-Do once, at the beginning of a development session
-- `git pull` to get the new code from github.
-- `npm install` to install or update all of the modules.
+### install
 
-When starting dev, do 
-- `npm run watch` to run and ability to change the code and things will rebuild on the background.
+- Install VSCode, create a folder "luckyluc"
+- Git clone this repository `git clone git@github.com:luc-chone/luckyluc-io luckyluc-io_src`
+
+### Start VSCode
+
+- Open VSCode in this folder `luckyluc-io_src`
+- Press **ctrl `** to have the terminal at the bottom 
+
+### Dev start (every day)
+
+- Make sure you have  the latest type `git pull` in terminal.
+- Run `npm install` to make sure to you have the latest node packages
+- Run `npm run watch` to start the server and the auto build on file change.
+
 
 Then, go to 
 
 - home page: http://localhost:8080/
-- 3d test: http://localhost:8080/test.html
 
 
-## How to develop
-
-- In VSCode in the project, (Ctrl + `) (or Command + Shift + P and type integrated term)
-- `npm run watch` does the start and build when code change.
-
-- for the 3d test: http://localhost:8080/test.html
-
-- To revert to working code 
-	- Click on terminal
-	- Type `Ctrl c`
-	- `git checkout -- .`
-
-
-## Useful docs
-
-- Gravity: https://doc.babylonjs.com/how_to/using_the_physics_engine
