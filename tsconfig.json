@@ -33,7 +33,9 @@
 		// allow to import moment like: import moment from "moment"
 		"allowSyntheticDefaultImports": true
 	},
-
+	"files": [
+		"./node_modules/@types/p5/lib/addons/p5.dom.d.ts",
+	],
 	// We want more control about which code we will compile and exclude
 	"include": [
 		"./scripts/**/*.ts"

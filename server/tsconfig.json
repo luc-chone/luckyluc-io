@@ -31,6 +31,10 @@
 		"allowSyntheticDefaultImports": true
 	},
 
+	"files": [
+		"../node_modules/@types/p5/lib/addons/p5.dom.d.ts",
+	],
+	
 	// We want more control about which code we will compile and exclude
 	"include": [
 		"./src/**/*.ts"
@@ -38,7 +42,6 @@
 
 	"exclude": [
 		"../node_modules",
-		"server", // we exclude server
 		".rpt2_cache" // this folder will be created by the rollup-typescript2, so, need to exlude it, can become confusing.
 	]
 }

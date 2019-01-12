@@ -29,12 +29,19 @@ blocks:
       - name: lib
         entries: ./src/lib-bundle.js
         dist: ./js/lib-bundle.js
-      - name: app
-        entries: ./src/**/*.ts
-        dist: ./js/app-bundle.js
+      - name: home
+        entries: ./src/home/**/*.ts
+        dist: ./js/home-bundle.js
         rollupOptions:
           globals:
             p5: window.p5
             mvdom: window.mvdom
+      - name: game1
+        entries: ./src/game1/**/*.ts
+        dist: ./js/game1-bundle.js
+        rollupOptions:
+          globals:
+            p5: window.p5
+            mvdom: window.mvdom            
   - name: server
     dir: ./
