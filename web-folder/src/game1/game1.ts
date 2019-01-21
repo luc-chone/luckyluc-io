@@ -6,27 +6,30 @@ const w = Math.round(window.innerWidth / 10) * 10 - 20;
 const h = Math.round(window.innerHeight / 10) * 10 - 20;
 
 const groundHeight = 32;
-const jumpHeight = 64;
+const jumpHeight = 96;
 const jumpSpeed = 5;
 
-let scl = 30;
+const boxSize = 30;
 
-const groundY = h - groundHeight - scl;
-const topY = h - groundHeight - jumpHeight - scl;
+const moveSpeed = 4;
+
+const groundY = h - groundHeight - boxSize;
+const topY = h - groundHeight - jumpHeight - boxSize;
+
+let dirX = 0;
 
 class Player {
 	x = 50;
-	y = h - groundHeight - scl;
+	y = h - groundHeight - boxSize;
 	jumping = 0; // 0: no jump, 1: jump up, 2: jump coming down;
 
 	constructor() {
 		on(document, 'keydown', (evt) => {
 			const kevt = <unknown>evt as KeyboardEvent;
-			console.log("" + evt.code);
 			if (kevt.key === 'a') {
-				this.x = (this.x > scl) ? this.x - scl : 0;
+				dirX = -1;
 			} else if (evt.key === 'd') {
-				this.x = (this.x < (w - 2 * scl)) ? this.x + scl : w - scl;
+				dirX = 1;
 			} else if (evt.key === 'w' || evt.key === 'Space') {
 				this.jump();
 				// this.y = (this.y > 0) ? this.y - scl : 0;
@@ -34,6 +37,13 @@ class Player {
 				// this.y = (this.y < (h - 2 * scl)) ? this.y + scl : h - scl;
 			}
 		});
+
+		on(document, 'keyup', (evt) => {
+			const kevt = <unknown>evt as KeyboardEvent;
+			if (kevt.key === 'a' || kevt.key === 'd') {
+				dirX = 0;
+			}
+		})
 	}
 
 	jump() {
@@ -47,6 +57,7 @@ class Player {
 		p.stroke(0, 0, 0, 0);
 		// compute x if jumping 
 
+		//#region    ---------- Jump Logic ---------- 
 		if (this.jumping === 1) {
 			if (topY < this.y - 1 * jumpSpeed) {
 				this.y = this.y - 1 * jumpSpeed;
@@ -62,7 +73,13 @@ class Player {
 				this.jumping = 0;
 			}
 		}
-		p.rect(this.x, this.y, scl, scl);
+		//#endregion ---------- /Jump Logic ---------- 
+
+		// move logic
+		this.x = this.x + dirX * moveSpeed;
+
+		// drawing
+		p.rect(this.x, this.y, boxSize, boxSize);
 	}
 }
 
