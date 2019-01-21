@@ -51,6 +51,11 @@ p.top-sentence{
 	left: 480px;
 }
 
+#arcade{
+	position: absolute;
+	top: 662px;
+	left: 523px;
+}
 
 #hardware-store-a{
 	position: absolute;
