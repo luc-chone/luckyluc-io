@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: lucky-web-server
+  name: lucky-web-server-srv
+  namespace: default
+spec:
+  ports:
+  - name: web
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  - name: ndebug
+    port: 9229
+    protocol: TCP
+    targetPort: 9229
+  selector:
+    run: lucky-web-server
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: lucky-web-server
+  name: lucky-web-server-dep
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: lucky-web-server
+  template:
+    metadata:
+      labels:
+        run: lucky-web-server
+    spec:
+      containers:
+      - image: localhost:5000/lucky-web-server:{{imageTag}}
+        name: lucky-web-server-ctn
+        imagePullPolicy: Always
+      restartPolicy: Always

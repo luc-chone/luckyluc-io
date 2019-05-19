@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lucky-web-server-dep
+  labels:
+    run: lucky-web-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: lucky-web-server
+  template:
+    metadata:
+      labels:
+        run: lucky-web-server
+    spec:
+      containers:
+      - image: gcr.io/{{project}}/lucky-web-server:{{imageTag}}
+        name: lucky-web-server-ctn
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 100m
+            memory: 200Mi          
+      restartPolicy: Always

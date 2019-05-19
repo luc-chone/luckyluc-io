@@ -17,7 +17,7 @@ tmp/
 notes/
 
 # prevent the output files to be checked in 
-web-folder/js/*.js
+web-folder/js/
 
 # prevent the .map
 *.map
