@@ -1,12 +1,12 @@
 system: lucky
-baseBlockDir: / # used as the base dir .dir (as '${baseDir}/${blockName}/'')
+baseBlockDir: ./ # used as the base dir .dir (as '${baseDir}/${blockName}/'')
 k8sDir: k8s/
 
 #-# {{assignJsonValue 'dropVersion' 'package.json' 'dropVersion'}}
 
 realms:
   _common:  
-    yamlDir: gke/ # Those are the google kubernetes engine yaml files. Might be the same for aws EKS (when it is released)
+    yamlDir: dev/ # Those are the google kubernetes engine yaml files. Might be the same for aws EKS (when it is released)
     webExternalPort: 8080
 
   dev:
@@ -43,5 +43,5 @@ blocks:
           globals:
             p5: window.p5
             mvdom: window.mvdom            
-  - name: server
+  - name: web-server
     dir: ./

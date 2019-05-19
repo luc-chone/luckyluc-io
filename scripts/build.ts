@@ -9,7 +9,7 @@ async function _default() {
 
 
 async function watch() {
-	spawn('./node_modules/.bin/vdev', ['build', 'watch', 'web']);
+	spawn('./node_modules/.bin/vdev', ['watch', 'web']);
 
 	await spawn('npm', ['run', 'start']);
 }
