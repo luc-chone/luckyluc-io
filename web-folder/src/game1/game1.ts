@@ -6,7 +6,7 @@ import { Player } from './player';
 
 const player = new Player();
 
-const block = new Block({ x: 100 });
+const block = new Block({ x: 100, y: groundY - 100, width: 100, height: 100 });
 
 // --------- Game Start --------- //
 startGame(setup, draw);
