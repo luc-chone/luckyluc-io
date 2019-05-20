@@ -1,9 +1,13 @@
 {
   "name": "luckyluc.io",
-  "version": "1.5.0",
+  "version": "0.5.0",
   "description": "luckyluc",
   "main": "start.js",
   "dropVersion": "DROP-001",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/luc-chone/luckyluc-io"
+  },  
   "dependencies": {
     "@types/express": "^4.16.1",
     "@types/p5": "^0.7.2",
