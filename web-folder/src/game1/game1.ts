@@ -1,11 +1,12 @@
-import { startGame, P5Instance } from '../utils';
-import { on } from 'mvdom';
-import { screenWidth, screenHeight, groundHeight } from './config';
+import { P5Instance, startGame } from '../utils';
+import { Block } from './block';
+import { groundHeight, screenHeight, screenWidth, groundY } from './config';
 import { Player } from './player';
 
 
 const player = new Player();
 
+const block = new Block({ x: 100 });
 
 // --------- Game Start --------- //
 startGame(setup, draw);
@@ -27,6 +28,7 @@ function draw(p: P5Instance) {
 
 
 	player.draw(p);
+	block.draw(p);
 
 }
 // --------- /Game Start --------- //≤˜µ
