@@ -23,7 +23,7 @@ export class Block {
 	}
 
 	draw(p: P5Instance) {
-		p.fill(150, 150, 150);
+		p.fill(153, 153, 153);
 		p.rect(this.x, this.y, this.width, this.height);
 	}
 }

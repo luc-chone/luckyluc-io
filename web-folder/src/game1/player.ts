@@ -7,6 +7,7 @@ const playerSize = 25;
 
 let playerDirX = 0; // 1 is to the right, and -1 is to the left, 0 do not move
 let playerDirY = 0; // 1 goes up, -1 goes down
+const playerSpeed = 2;
 const jumpMax = 50;
 const jumpMaxY = screenHeight - groundHeight - playerSize - jumpMax;
 const jumpSpeed = 2;
@@ -20,11 +21,11 @@ export class Player {
 		// draw player
 		p.fill(57, 100, 243);
 
-		// calculate x with playerDirX
-		this.x = this.x + playerDirX;
+		//// calculate new x
+		this.x = this.x + (playerDirX * playerSpeed);
 
+		//// calculate new y (jump)
 		const newY = this.y - (playerDirY * jumpSpeed);
-
 		// up but below max, we change y
 		if (playerDirY === 1 && newY > jumpMaxY) {
 			this.y = newY;
@@ -33,7 +34,7 @@ export class Player {
 		else if (playerDirY === 1 && newY <= jumpMaxY) {
 			playerDirY = -1;
 		}
-		// down but before playerGroundY, then, we change y
+		// down but beforejeieifwieieiejfieilslieijfjeijjfjfejjjejeje playerGroundY, then, we change y
 		else if (playerDirY === -1 && newY < this.playerGroundY) {
 			this.y = newY;
 		}
@@ -48,17 +49,15 @@ export class Player {
 }
 
 on(document, 'keydown', (evt) => {
-	console.log('', evt.key);
+
 	if (evt.key === 'a') {
 		playerDirX = -1;
 	} else if (evt.key === 'd') {
 		playerDirX = 1;
 	} else if (evt.key === 'w' || evt.key === ' ') {
-		// TODO: will do the jump
 		if (playerDirY === 0) {
 			playerDirY = 1;
 		}
-
 	} else if (evt.key === 's') {
 		// TODO: will force go down
 	} else {
@@ -67,8 +66,8 @@ on(document, 'keydown', (evt) => {
 });
 
 on(document, 'keyup', (evt) => {
+	// when not key jump, we set play to not move
 	if (evt.key !== 'w' || evt.key !== ' ') {
-
 		playerDirX = 0;
 	}
 });
