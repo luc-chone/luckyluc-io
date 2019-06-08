@@ -1,7 +1,7 @@
 import { screenHeight, groundHeight, groundY } from "./config";
 import { P5Instance } from "utils";
 import { on } from "mvdom";
-
+import { Scene } from './scene';
 
 const playerSize = 25;
 
@@ -16,13 +16,24 @@ export class Player {
 	x = 50;
 	playerGroundY = groundY - playerSize
 	y = this.playerGroundY;
+	width = playerSize;
+	height = playerSize;
+	scene: Scene;
+
+	constructor(scene: Scene) {
+		this.scene = scene;
+	}
 
 	draw(p: P5Instance) {
 		// draw player
 		p.fill(57, 100, 243);
 
 		//// calculate new x
-		this.x = this.x + (playerDirX * playerSpeed);
+		// TODO: canMoveX()
+		const newX = this.x + (playerDirX * playerSpeed);
+		if (this.scene.canMove({ x: newX, width: this.width })) {
+			this.x = newX;
+		}
 
 		//// calculate new y (jump)
 		const newY = this.y - (playerDirY * jumpSpeed);

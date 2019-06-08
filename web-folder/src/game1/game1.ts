@@ -1,12 +1,17 @@
 import { P5Instance, startGame } from '../utils';
 import { Block } from './block';
+import { Scene } from './scene';
 import { groundHeight, screenHeight, screenWidth, groundY } from './config';
 import { Player } from './player';
 
+const scene = new Scene({ groundY: groundY });
 
-const player = new Player();
+const player = new Player(scene);
 
-const block = new Block({ x: 100, y: groundY - 100, width: 100, height: 100 });
+const block1 = new Block({ x: 100, y: groundY - 20, width: 20, height: 20 });
+const block2 = new Block({ x: 200, y: groundY - 20, width: 20, height: 20 });
+scene.addBlock(block1);
+scene.addBlock(block2);
 
 // --------- Game Start --------- //
 startGame(setup, draw);
@@ -26,9 +31,14 @@ function draw(p: P5Instance) {
 	p.fill(10, 210, 7);
 	p.rect(0, screenHeight - groundHeight, screenWidth, groundHeight);
 
+	// draw the blocks
+	for (const block of scene.getBlocks()) {
+		block.draw(p);
+	}
 
+	// draw the player
 	player.draw(p);
-	block.draw(p);
+
 
 }
 // --------- /Game Start --------- //≤˜µ
